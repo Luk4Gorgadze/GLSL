@@ -9,16 +9,15 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 float plot(vec2 st, float pct){
-  return  smoothstep( pct, pct, st.y);// -
-          smoothstep( pct, pct+0.09, st.y);
+  return  smoothstep( pct-0.02, pct, st.y) -
+          smoothstep( pct, pct+0.02, st.y);
 }
 
 void main() {
     vec2 st = gl_FragCoord.xy/u_resolution;
 
-    // Smooth interpolation between 0.1 and 0.9
-    float y = smoothstep(0.1,0.9,st.x);
-
+    float y = pow(st.x,5.0);
+    //float y = step(0.5, st.x);
     vec3 color = vec3(y);
 
     float pct = plot(st,y);
