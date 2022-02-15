@@ -15,8 +15,8 @@ float circle(in vec2 _st, in float _radius){
 
 void main(){
 	vec2 st = gl_FragCoord.xy/u_resolution.xy;
-
-	vec3 color = vec3(circle(st,0.9));
+	st.x *= u_resolution.x/u_resolution.y;
+	vec3 color = vec3(circle(st,0.5));
 
 	gl_FragColor = vec4( color, 1.0 );
-}
+} 
