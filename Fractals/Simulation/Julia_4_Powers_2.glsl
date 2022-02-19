@@ -48,8 +48,8 @@ void main()
     float smoothcolor=0.;
     for(float i=0.;i<Max_Iter;i++)
     {
-        //z=vec2(z.x*z.x-z.y*z.y,2.*z.x*z.y)+c/1.2;
-        //z=vec2(pow(z.x,3.)-3.*z.x*pow(z.y,2.),3.*pow(z.x,2.)*z.y-pow(z.y,3.))+c/1.2;// cube
+        z=vec2(z.x*z.x-z.y*z.y,2.*z.x*z.y)+c/1.2;
+        z=vec2(pow(z.x,3.)-3.*z.x*pow(z.y,2.),3.*pow(z.x,2.)*z.y-pow(z.y,3.))+c/1.2;// cube
         //z=vec2(pow(z.x,4.)-6.*pow(z.x,2.)*pow(z.y,2.)+pow(z.y,4.),4.*pow(z.x,3.)*z.y-4.*z.x*pow(z.y,3.))+c;
         z=vec2(pow(z.x,5.)-10.*pow(z.x,3.)*pow(z.y,2.)+5.*z.x*pow(z.y,4.),5.*pow(z.x,4.)*z.y-10.*pow(z.x,2.)*pow(z.y,3.)+pow(z.y,5.))+c/.99;
         smoothcolor+= fract(exp(-length(z) * 1.5)) * 0.15;
