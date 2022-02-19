@@ -5,7 +5,7 @@ void setup() {
     size(1000, 1000, P2D);
     noStroke();
     
-    shader = loadShader("Julia_4_Powers.glsl");
+    shader = loadShader("Julia_4_Powers_2.glsl");
     //hader.set("zoom",mouseWheel);
 }
 

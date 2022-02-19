@@ -60,11 +60,11 @@ void main()
     
     //END OF JULIA
     
-    col+=smoothcolor*vec3(.9922,.1843,.0745)*5.;
+    col+=smoothcolor*vec3(0.9059, 0.8941, 0.1216)*5.;
     float r=.4+.4*(sin(smoothcolor*.1+u_time*.63));
     float g=r*r*.7;
     float b=r*g*10.;
     
-    gl_FragColor=vec4(col+vec3(.0941,.0353,.2275),1.);
+    gl_FragColor=vec4(col+vec3(0.0784, 0.0235, 0.2078),1.);
     
 }
