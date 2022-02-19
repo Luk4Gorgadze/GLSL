@@ -1,2 +1,11 @@
-#New adventure begins :)
-## GLSL shaders
+<h1> GLSL shaders</h1>
+<h2>New adventure begins :)</h2>
+
+Coolest Simulation images so far:
+<p>
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Julia1.png" width="350" title="Julia1">
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Julia2.png" width="350" alt="Julia2">
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Julia3.png" width="350" title="Julia3">
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/julia4.png" width="350" alt="Julia4">
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Julia5.png" width="350" alt="Julia5">
+</p>
