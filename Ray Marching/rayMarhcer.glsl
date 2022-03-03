@@ -1,7 +1,7 @@
 #ifdef GL_ES
 precision highp float;
 #endif
-#define MAX_STEPS 100
+#define MAX_STEPS 1000
 #define MAX_DIST 100.
 #define SURF_DIST.01
 
@@ -11,15 +11,20 @@ uniform float u_time;
 
 float GetDist(vec3 p)
 {
+    float d;
+    
     vec4 s=vec4(0.,1.2,6.,1.);
     vec4 ss=vec4(0,1.2,6.,.1);
     ss.xz=s.xz+vec2(2.*sin(u_time),2.*cos(u_time));
     float sphereDist=length(p-s.xyz)-s.w;
     float sphereDist2=length(p-ss.xyz)-ss.w;
     float planeDist=p.y;
-    float d=min(sphereDist2,min(sphereDist,planeDist));
+    d=min(sphereDist2,min(sphereDist,planeDist));
+    
     return d;
 }
+
+
 vec3 GetNormal(vec3 p)
 {
     float d=GetDist(p);
@@ -38,7 +43,7 @@ vec3 GetNormal(vec3 p)
         for(int i=0;i<MAX_STEPS;i++)
         {
             vec3 p=ro+rd*dO;
-            float dS=GetDist(p);
+            float dS= GetDist(p);
             dO+=dS;
             if(dO>MAX_DIST||dS<SURF_DIST)break;
         }
@@ -65,14 +70,14 @@ vec3 GetNormal(vec3 p)
         uv.x*=u_resolution.x/u_resolution.y;
         vec3 col=vec3(0);
         
-        vec3 cam=vec3(0.,1.,0.);
+        vec3 cam=vec3(0.,2.,0.);
         vec3 rd=normalize(vec3(uv.x,uv.y,1.));
         float d=raymarch(cam,rd);
         
         vec3 p=cam+rd*d;
         float dif=getLight(p);
         
-        col=vec3(dif)+vec3(.1569,.0039,.2196);
+        col=vec3(dif)+vec3(.0902,.0745,.1922);
         //col = GetNormal(p);
         gl_FragColor=vec4(col,1.);
         
