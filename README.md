@@ -11,6 +11,6 @@ Coolest Simulation images so far:
   <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Julia6.png" width="350" alt="Julia6">
   <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Mandelbulb1.png" width="350" alt="MandelBulb1">
   <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/Mandelbulb2.png" width="350" alt="MandelBulb2">
-                                                                                                               
-
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/MandelBulb3.png" width="350" alt="MandelBulb2">       
+  <img src="https://github.com/LukeGorgadze/GLSL/blob/master/Fractals/Images/MandelBulb4.png" width="350" alt="MandelBulb1">                                                                                             
 </p>
