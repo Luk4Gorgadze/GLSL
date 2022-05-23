@@ -65,12 +65,12 @@ float mandelBulb(vec3 p,mat3 transform)
   
   vec4 trap=vec4(abs(w),m);
   float dz=1.;
-  float power=8.;
+  float power=8.3;
   
   for(int i=0;i<3;i++)
   {
     // dz = 8*z^7*dz
-    dz=8.*pow(m,3.5)*dz+1.9;
+    dz=8.*pow(m,3.5)*dz;
     
     // z = z^8+z
     float r=length(w);
@@ -79,7 +79,7 @@ float mandelBulb(vec3 p,mat3 transform)
     float a=power*atan(w.x,w.z);
     w=p+pow(r,power)*vec3(sin(b)*sin(a),cos(b),sin(b)*cos(a));
     //w *= abs(sin(b)*cos(a)*log(2. * abs(cos(a))))+.8;
-    w *= abs(tan(a) * sin(a) * abs(sin(a))) * .4 * abs(sin(a)) * sin(cos(b)) * abs(cos(a)) + .6;
+    w *= abs(tan(a) * sin(a) * abs(sin(a))) * .5 * abs(sin(a)) * sin(cos(b)) * abs(cos(a)) + .9;
     //w = mod(u_time,w.x);
     trap=min(trap,vec4(abs(w),m));
     
@@ -88,7 +88,7 @@ float mandelBulb(vec3 p,mat3 transform)
     break;
   }
   // distance estimation (through the Hubbard-Douady potential)
-  return.035*log(m)*sqrt(m)/dz * 5.;
+  return.035*log2(m)*(sqrt(m)/dz) * 2.;
 }
 vec2 rayMarch(vec3 ro,vec3 rd){
   float depth=.2;
@@ -107,13 +107,13 @@ vec2 rayMarch(vec3 ro,vec3 rd){
 }
 
 vec3 calcNormal(vec3 p){
-  vec2 e=vec2(1.,-1.)*.0005;// epsilon
+  vec2 e=vec2(2.,2.)*.000001;// epsilon
   float r=1.;// radius of sphere
   return normalize(
-    e.xyy*sdSphere(p+e.xyy,r)+
-    e.yyx*sdSphere(p+e.yyx,r)+
-    e.yxy*sdSphere(p+e.yxy,r)+
-    e.xxx*sdSphere(p+e.xxx,r));
+    e.xyy*mandelBulb(p+e.xyy,identity())+
+    e.yyx*mandelBulb(p+e.yyx,identity())+
+    e.yxy*mandelBulb(p+e.yxy,identity())+
+    e.xxx*mandelBulb(p+e.xxx,identity()));
   }
   
   void main()
@@ -122,7 +122,7 @@ vec3 calcNormal(vec3 p){
     uv-=.5;
     uv.x*=u_resolution.x/u_resolution.y;
     
-    vec3 col=vec3(.4275,.898,.9804);
+    vec3 col=vec3(0.1843, 0.4, 0.4353);
     vec3 ro=vec3(0,0,3);// ray origin that represents camera position
     vec3 rd=normalize(vec3(uv,-1));// ray direction
     
@@ -133,11 +133,11 @@ vec3 calcNormal(vec3 p){
     float multiplier = pow(ite/float(MAX_MARCHING_STEPS),.9) * 1.5;
     
     if(d>MAX_DIST){
-      col=vec3(1.0, 0.4392, 0.6745) * multiplier * 1.5;// ray didn't hit anything
+      col=vec3(0.8745, 0.5098, 0.9686) * multiplier * 1.5;// ray didn't hit anything
     }
     else{
       vec3 p=ro+rd*d;// point on sphere we discovered from ray marching
-      vec3 normal=calcNormal(p);
+      vec3 normal=calcNormal(p - d);
       vec3 lightPosition=vec3(1.,.5,2.2);
       vec3 lightDirection=normalize(lightPosition-p);
       
@@ -147,8 +147,8 @@ vec3 calcNormal(vec3 p){
       //shadow
       vec3 newRayOrigin=p;
       float shadowRayLength=rayMarch(newRayOrigin,lightDirection).x;// cast shadow ray to the light source
-      if(shadowRayLength<length(lightPosition-newRayOrigin))dif*=.5;// if the shadow ray hits the sphere, set the diffuse reflection to zero, simulating a shadow
-      col=vec3(dif)*vec3(0.3255, 0.5059, 1.0)*pow(.2-d,2.)/1.5 *  multiplier * 1.5;
+      if(shadowRayLength<length(lightPosition-newRayOrigin))dif*=.8;// if the shadow ray hits the sphere, set the diffuse reflection to zero, simulating a shadow
+      col=vec3(dif)*vec3(0.4275, 0.4157, 0.9765)*pow(.2-d,2.)/1.5 *  multiplier * 1.5;
     }
     
     // Output to screen
